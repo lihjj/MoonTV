@@ -119,3 +119,52 @@ export default async function RootLayout({
     </html>
   );
 }
+import { useEffect } from 'react';
+
+
+// 如果是 _app.tsx，使用 AppProps
+// import type { AppProps } from 'next/app';
+// export default function MyApp({ Component, pageProps }: AppProps) {
+
+// 如果是 Layout.tsx，使用 children
+export default function Layout({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    const disableDevTools = (e: KeyboardEvent) => {
+      // 禁止 F12
+      if (e.key === 'F12') {
+        e.preventDefault();
+        alert('开发者工具已被禁用！');
+      }
+      // 禁止 Ctrl+Shift+I（开发者工具）
+      if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+        e.preventDefault();
+        alert('开发者工具已被禁用！');
+      }
+      // 禁止 Ctrl+Shift+J（控制台）
+      if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+        e.preventDefault();
+        alert('开发者工具已被禁用！');
+      }
+      // 禁止 Ctrl+U（查看源代码）
+      if (e.ctrlKey && e.key === 'U') {
+        e.preventDefault();
+        alert('查看源代码已被禁用！');
+      }
+      // 禁止右键菜单
+      const disableContextMenu = (e: MouseEvent) => {
+        e.preventDefault();
+        alert('右键菜单已被禁用！');
+      };
+      document.addEventListener('contextmenu', disableContextMenu);
+      return () => document.removeEventListener('contextmenu', disableContextMenu);
+    };
+
+    document.addEventListener('keydown', disableDevTools);
+    return () => document.removeEventListener('keydown', disableDevTools);
+  }, []);
+
+  return <>{children}</>;
+  // 如果是 _app.tsx，返回：
+  // return <Component {...pageProps} />;
+}
+
