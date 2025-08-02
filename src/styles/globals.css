@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 :root {
-  /* #region  /**=========== Primary Color (Blue Palette) =========== */
+  /* #region  /**=========== Primary Color =========== */
+  /* !STARTERCONF Customize these variable, copy and paste from /styles/colors.css for list of colors */
   --tw-color-primary-50: 240 249 255;
   --tw-color-primary-100: 224 242 254;
   --tw-color-primary-200: 186 230 253;
@@ -25,45 +26,15 @@
   --color-primary-800: rgb(var(--tw-color-primary-800)); /* #075985 */
   --color-primary-900: rgb(var(--tw-color-primary-900)); /* #0c4a6e */
   /* #endregion  /**======== Primary Color =========== */
-
-  /* #region  /**=========== Secondary Color (Purple Palette) =========== */
-  --tw-color-secondary-50: 245 243 255;
-  --tw-color-secondary-100: 237 233 254;
-  --tw-color-secondary-200: 221 214 254;
-  --tw-color-secondary-300: 196 181 253;
-  --tw-color-secondary-400: 167 139 250;
-  --tw-color-secondary-500: 139 92 246;
-  --tw-color-secondary-600: 124 58 237;
-  --tw-color-secondary-700: 109 40 217;
-  --tw-color-secondary-800: 91 33 182;
-  --tw-color-secondary-900: 76 29 149;
-  --color-secondary-50: rgb(var(--tw-color-secondary-50)); /* #f5f3ff */
-  --color-secondary-100: rgb(var(--tw-color-secondary-100)); /* #ede9fe */
-  --color-secondary-200: rgb(var(--tw-color-secondary-200)); /* #ddd6fe */
-  --color-secondary-300: rgb(var(--tw-color-secondary-300)); /* #c4b5fd */
-  --color-secondary-400: rgb(var(--tw-color-secondary-400)); /* #a78bfa */
-  --color-secondary-500: rgb(var(--tw-color-secondary-500)); /* #8b5cf6 */
-  --color-secondary-600: rgb(var(--tw-color-secondary-600)); /* #7c3aed */
-  --color-secondary-700: rgb(var(--tw-color-secondary-700)); /* #6d28d9 */
-  --color-secondary-800: rgb(var(--tw-color-secondary-800)); /* #5b21b6 */
-  --color-secondary-900: rgb(var(--tw-color-secondary-900)); /* #4c1d95 */
-  /* #endregion  /**======== Secondary Color =========== */
-
-  /* #region  /**=========== Neutral Colors =========== */
-  --tw-color-neutral-50: 249 250 251;
-  --tw-color-neutral-900: 17 24 39;
-  --color-neutral-50: rgb(var(--tw-color-neutral-50)); /* #f9fafb */
-  --color-neutral-900: rgb(var(--tw-color-neutral-900)); /* #111827 */
-  /* #endregion  /**======== Neutral Colors =========== */
 }
 
 @layer base {
   /* inter var - latin */
   @font-face {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Inter';
     font-style: normal;
     font-weight: 100 900;
-    font-display: swap; /* Changed to swap for faster rendering */
+    font-display: block;
     src: url('/fonts/inter-var-latin.woff2') format('woff2');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
       U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212,
@@ -76,74 +47,58 @@
 
   /* #region  /**=========== Typography =========== */
   .h0 {
-    @apply font-primary text-3xl font-extrabold tracking-tight leading-tight md:text-5xl;
+    @apply font-primary text-3xl font-bold md:text-5xl;
   }
 
   h1,
   .h1 {
-    @apply font-primary text-2xl font-bold tracking-tight leading-snug md:text-4xl;
+    @apply font-primary text-2xl font-bold md:text-4xl;
   }
 
   h2,
   .h2 {
-    @apply font-primary text-xl font-bold tracking-tight leading-snug md:text-3xl;
+    @apply font-primary text-xl font-bold md:text-3xl;
   }
 
   h3,
   .h3 {
-    @apply font-primary text-lg font-semibold tracking-tight leading-snug md:text-2xl;
+    @apply font-primary text-lg font-bold md:text-2xl;
   }
 
   h4,
   .h4 {
-    @apply font-primary text-base font-semibold tracking-tight leading-snug md:text-lg;
+    @apply font-primary text-base font-bold md:text-lg;
   }
 
   body,
   .p {
-    @apply font-primary text-sm leading-relaxed text-neutral-900 md:text-base;
+    @apply font-primary text-sm md:text-base;
   }
   /* #endregion  /**======== Typography =========== */
 
   .layout {
-    /* Fluid layout: 1200px max, 90% width, with padding */
-    max-width: 75rem;
-    @apply mx-auto w-[90%] px-4 sm:px-6 lg:px-8;
+    /* 1100px */
+    max-width: 68.75rem;
+    @apply mx-auto w-11/12;
   }
 
   .bg-dark a.custom-link {
-    @apply border-neutral-50 hover:border-neutral-50/0 text-neutral-50;
+    @apply border-gray-200 hover:border-gray-200/0;
   }
 
+  /* Class to adjust with sticky footer */
   .min-h-main {
-    @apply min-h-[calc(100vh-64px)]; /* Adjusted for slightly taller footer */
-  }
-}
-
-@layer components {
-  /* Primary Button */
-  .btn-primary {
-    @apply inline-flex items-center px-6 py-3 text-base font-medium text-white bg-primary-500 rounded-lg hover:bg-primary-600 focus:ring-2 focus:ring-primary-400 focus:outline-none transition-colors duration-300;
-  }
-
-  /* Outline Button */
-  .btn-outline {
-    @apply inline-flex items-center px-6 py-3 text-base font-medium text-primary-600 border border-primary-600 rounded-lg hover:bg-primary-50 focus:ring-2 focus:ring-primary-400 focus:outline-none transition-colors duration-300;
-  }
-
-  /* Card Component */
-  .card {
-    @apply bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-300;
+    @apply min-h-[calc(100vh-56px)];
   }
 }
 
 @layer utilities {
   .animated-underline {
-    background-image: linear-gradient(transparent, transparent),
+    background-image: linear-gradient(#33333300, #33333300),
       linear-gradient(
         to right,
-        var(--color-secondary-400),
-        var(--color-secondary-500)
+        var(--color-primary-400),
+        var(--color-primary-500)
       );
     background-size: 100% 2px, 0 2px;
     background-position: 100% 100%, 0 100%;
@@ -151,12 +106,13 @@
   }
   @media (prefers-reduced-motion: no-preference) {
     .animated-underline {
-      transition: background-size 0.4s ease, color 0.4s ease;
+      transition: 0.3s ease;
+      transition-property: background-size, color, background-color,
+        border-color;
     }
   }
   .animated-underline:hover,
   .animated-underline:focus-visible {
     background-size: 0 2px, 100% 2px;
-    @apply text-secondary-600;
   }
 }
